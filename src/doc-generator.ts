@@ -1,15 +1,47 @@
+interface DocGeneratorParameters {
+  title?: string;
+  description?: string;
+  gherkin?: string;
+  inputDescription?: string;
+  inputType?: string;
+  inputTypeExample?: string;
+  outputDescription?: string;
+  outputType?: string;
+  outputTypeExample?: string;
+}
+
 export class DocGenerator {
-  constructor(
-    private readonly title?: string,
-    private readonly description?: string,
-    private readonly gherkin?: string,
-    private readonly inputDescription?: string,
-    private readonly inputType?: string,
-    private readonly inputTypeExample?: string,
-    private readonly outputDescription?: string,
-    private readonly outputType?: string,
-    private readonly outputTypeExample?: string
-  ) {}
+  private readonly title?: string;
+  private readonly description?: string;
+  private readonly gherkin?: string;
+  private readonly inputDescription?: string;
+  private readonly inputType?: string;
+  private readonly inputTypeExample?: string;
+  private readonly outputDescription?: string;
+  private readonly outputType?: string;
+  private readonly outputTypeExample?: string;
+
+  constructor({
+    title,
+    description,
+    gherkin,
+    inputDescription,
+    inputType,
+    inputTypeExample,
+    outputDescription,
+    outputType,
+    outputTypeExample,
+  }: DocGeneratorParameters) {
+    this.title = title;
+    this.description = description;
+    this.gherkin = gherkin;
+    this.inputDescription = inputDescription;
+    this.inputType = inputType;
+    this.inputTypeExample = inputTypeExample;
+    this.outputDescription = outputDescription;
+    this.outputType = outputType;
+    this.outputTypeExample = outputTypeExample;
+  }
 
   generate(): string {
     return (

@@ -2,7 +2,7 @@ import { DocGenerator } from "./doc-generator";
 
 describe("DocGenerator", () => {
   it("generates a minimal documentation", () => {
-    const documentation = new DocGenerator().generate();
+    const documentation = new DocGenerator({}).generate();
 
     const expectedDocumentation =
       "# Default documentation\n" +
@@ -18,7 +18,9 @@ describe("DocGenerator", () => {
   });
 
   it("generates a documentation for a provided name", () => {
-    const documentation = new DocGenerator("My awesome doc").generate();
+    const documentation = new DocGenerator({
+      title: "My awesome doc",
+    }).generate();
 
     const expectedDocumentation =
       "# My awesome doc\n" +
@@ -34,10 +36,10 @@ describe("DocGenerator", () => {
   });
 
   it("generates a documentation for a provided name and description", () => {
-    const documentation = new DocGenerator(
-      "My awesome doc",
-      "My awesome doc has a cool description"
-    ).generate();
+    const documentation = new DocGenerator({
+      title: "My awesome doc",
+      description: "My awesome doc has a cool description",
+    }).generate();
 
     const expectedDocumentation =
       "# My awesome doc\n" +
@@ -62,11 +64,10 @@ describe("DocGenerator", () => {
       "    When this happens\n" +
       "    Then we have stuff\n";
 
-    const documentation = new DocGenerator(
-      "My awesome doc",
-      undefined,
-      gherkinFileContent
-    ).generate();
+    const documentation = new DocGenerator({
+      title: "My awesome doc",
+      gherkin: gherkinFileContent,
+    }).generate();
 
     const expectedDocumentation =
       "# My awesome doc\n" +
@@ -89,12 +90,10 @@ describe("DocGenerator", () => {
   });
 
   it("generates a documentation for a provided name and an input description", () => {
-    const documentation = new DocGenerator(
-      "My awesome doc",
-      undefined,
-      undefined,
-      "My Input description"
-    ).generate();
+    const documentation = new DocGenerator({
+      title: "My awesome doc",
+      inputDescription: "My Input description",
+    }).generate();
 
     const expectedDocumentation =
       "# My awesome doc\n" +
@@ -114,13 +113,10 @@ describe("DocGenerator", () => {
   it("generates a documentation for a provided name and an input type", () => {
     const inputType = "{\n" + '  "foo": string\n' + "}\n";
 
-    const documentation = new DocGenerator(
-      "My awesome doc",
-      undefined,
-      undefined,
-      undefined,
-      inputType
-    ).generate();
+    const documentation = new DocGenerator({
+      title: "My awesome doc",
+      inputType,
+    }).generate();
 
     const expectedDocumentation =
       "# My awesome doc\n" +
@@ -143,14 +139,10 @@ describe("DocGenerator", () => {
   it("generates a documentation for a provided name and an input type example", () => {
     const inputTypeExample = "{\n" + '  "foo": "bar"\n' + "}\n";
 
-    const documentation = new DocGenerator(
-      "My awesome doc",
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      inputTypeExample
-    ).generate();
+    const documentation = new DocGenerator({
+      title: "My awesome doc",
+      inputTypeExample,
+    }).generate();
 
     const expectedDocumentation =
       "# My awesome doc\n" +
@@ -171,15 +163,10 @@ describe("DocGenerator", () => {
   });
 
   it("generates a documentation for a provided name and an output description", () => {
-    const documentation = new DocGenerator(
-      "My awesome doc",
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      "My Output description"
-    ).generate();
+    const documentation = new DocGenerator({
+      title: "My awesome doc",
+      outputDescription: "My Output description",
+    }).generate();
 
     const expectedDocumentation =
       "# My awesome doc\n" +
@@ -199,16 +186,10 @@ describe("DocGenerator", () => {
   it("generates a documentation for a provided name and an output type", () => {
     const outputType = "{\n" + '  "foo": string\n' + "}\n";
 
-    const documentation = new DocGenerator(
-      "My awesome doc",
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      outputType
-    ).generate();
+    const documentation = new DocGenerator({
+      title: "My awesome doc",
+      outputType,
+    }).generate();
 
     const expectedDocumentation =
       "# My awesome doc\n" +
@@ -232,17 +213,10 @@ describe("DocGenerator", () => {
   it("generates a documentation for a provided name and an output type example", () => {
     const outputTypeExample = "{\n" + '  "foo": "bar"\n' + "}\n";
 
-    const documentation = new DocGenerator(
-      "My awesome doc",
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      outputTypeExample
-    ).generate();
+    const documentation = new DocGenerator({
+      title: "My awesome doc",
+      outputTypeExample,
+    }).generate();
 
     const expectedDocumentation =
       "# My awesome doc\n" +
