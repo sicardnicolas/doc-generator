@@ -1,44 +1,44 @@
-import { updateOutput } from "ts-jest/dist/legacy/compiler/compiler-utils";
-
 export class DocGenerator {
-  static generate(
-    title?: string,
-    description?: string,
-    gherkin?: string,
-    inputDescription?: string,
-    inputType?: string,
-    inputTypeExample?: string,
-    outputDescription?: string,
-    outputType?: string,
-    outputTypeExample?: string
-  ): string {
+  constructor(
+    private readonly title?: string,
+    private readonly description?: string,
+    private readonly gherkin?: string,
+    private readonly inputDescription?: string,
+    private readonly inputType?: string,
+    private readonly inputTypeExample?: string,
+    private readonly outputDescription?: string,
+    private readonly outputType?: string,
+    private readonly outputTypeExample?: string
+  ) {}
+
+  generate(): string {
     return (
-      this.getTitle(title) +
+      this.getTitle(this.title) +
       "## Description\n" +
-      this.ifDefined(description) +
-      this.formatCodeIfDefined("gherkin", gherkin) +
+      this.ifDefined(this.description) +
+      this.formatCodeIfDefined("gherkin", this.gherkin) +
       "## Input\n" +
-      this.ifDefined(inputDescription) +
-      this.formatCodeIfDefined("text", inputType) +
-      this.formatCodeIfDefined("json", inputTypeExample) +
+      this.ifDefined(this.inputDescription) +
+      this.formatCodeIfDefined("text", this.inputType) +
+      this.formatCodeIfDefined("json", this.inputTypeExample) +
       "## Output\n" +
-      this.ifDefined(outputDescription) +
-      this.formatCodeIfDefined("text", outputType) +
-      this.formatCodeIfDefined("json", outputTypeExample)
+      this.ifDefined(this.outputDescription) +
+      this.formatCodeIfDefined("text", this.outputType) +
+      this.formatCodeIfDefined("json", this.outputTypeExample)
     );
   }
 
-  private static getTitle(input?: string): string {
+  private getTitle(input?: string): string {
     return input === undefined
       ? "# Default documentation\n\n"
       : `# ${input}\n\n`;
   }
 
-  private static ifDefined(input?: string): string {
+  private ifDefined(input?: string): string {
     return input === undefined ? "\n" : `\n${input}\n\n`;
   }
 
-  private static formatCodeIfDefined(type: string, input?: string): string {
+  private formatCodeIfDefined(type: string, input?: string): string {
     return input === undefined
       ? ""
       : "```" + `${type}\n` + `${input}` + "```\n";
